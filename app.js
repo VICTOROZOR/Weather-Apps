@@ -18,4 +18,36 @@ function getWeather() {
       console.error("Error fetching current weather data: ", error);
       alert("Error fetching current weather data. Please try again.");
     });
+
+  
+  fetch(forecastUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      displayHourlyForecast(data.list);
+    })
+    .catch((error) => {
+      console.error("Error fetching hourly forecast data: ", error);
+      alert("Error fetching hourly forecast data. Please try again.");
+    });
+}
+
+function displayWeather(data) {
+  const tempInfo = document.getElementById("temp-div");
+  const weatherInfo = document.getElementById("weather-info");
+  const weatherIcon = document.getElementById("weather-icon");
+  const hourlyForecast = document.getElementById(hourly - forecast);
+
+  weatherInfo.innerHTML = " ";
+  hourlyForecast.innerHTML = " ";
+  tempInfo.innerHTML = " ";
+
+  if (data.cod === "404") {
+    weatherInfo.innerHTML = `<p>${data.message}</p>`;
+  } else {
+    const cityName = data.cityName;
+    const temperature = Math.round(data.main.temp - 273.15);
+    const description = data.weather[0].description;
+    const iconCode = data.weather[0].icon;
+    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
+  }
 }
