@@ -19,6 +19,19 @@ function getWeather() {
       alert("Error fetching current weather data. Please try again.");
     });
 
+  function displayHourlyForecast(houlyData) {
+  const hourlyForecastDiv = document.getElementById('hourly-forecast')
+  const next24Hours = houlyData.slice(0, 8)
+
+  next24Hours.forEach(item => {
+    const dataTime = new Date(item.dt * 1000)
+    const hour = dataTime.getHours()
+    const temperature = Math.round(item.main.temp - 273.15)
+    const iconCode = item.weather[0].icon
+    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`
+  })
+}
+
   
   fetch(forecastUrl)
     .then((response) => response.json())
