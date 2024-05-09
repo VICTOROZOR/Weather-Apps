@@ -95,4 +95,7 @@ function displayHourlyForecast(houlyData) {
     hourlyForecastDiv.innerHTML += hourlyItemHtml
   });
 }
-
+function showImage() {
+  const weatherIcon = document.getElementById("weather-icon");
+  weatherIcon.style.display = "block";
+}
